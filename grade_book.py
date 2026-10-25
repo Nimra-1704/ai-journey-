@@ -1,4 +1,9 @@
-gradebook = []
+import json
+try:
+    with open ("student.json", "r") as file:
+        gradebook = json.load(file)
+except FileNotFoundError:
+    gradebook = []
 running = True
 while running:
     print("---Student Grade Book---")
@@ -11,6 +16,8 @@ while running:
         score = int(input("Enter student's score: "))
         student = {"name": name, "score": score}
         gradebook.append(student)
+        with open("student.json", "w") as file:
+            json.dump(gradebook, file)
         print(f"Student {name} added.")
     elif choice == "2":
         if len(gradebook) == 0:
